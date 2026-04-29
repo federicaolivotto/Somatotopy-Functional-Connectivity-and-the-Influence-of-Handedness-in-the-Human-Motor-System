@@ -143,6 +143,10 @@ A key finding is the difference in **network organization**:
 
 --> Suggests fundamentally different motor network strategies
 
+## Results Visualization
+
+![Finger PPI connectome](Finger_PPI_connectome.png)
+
 ---
 
 ## Key Insights
