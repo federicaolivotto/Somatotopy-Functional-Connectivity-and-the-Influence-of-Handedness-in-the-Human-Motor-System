@@ -308,16 +308,18 @@ A key finding is the difference in **network organization**:
    spm fmri
 
 2. Initialize SPM batch system:
+   ```matlab
    spm_jobman('initcfg')
 
-3. Open the Batch Editor from the SPM GUI
+4. Open the Batch Editor from the SPM GUI
 
-4. Load batch files from:
-   SPM_batches/
+5. Load batch files from:
+   `SPM_batches/`
 
-5. Update all paths to match your local dataset
+6. Update all paths to match your local dataset
 
-6. Run batches sequentially following the preprocessing → GLM → PPI pipeline
+7. Run batches sequentially following this order:
+   Preprocessing → First-level GLM → PPI → Second-level analysis
 
 ---
 
