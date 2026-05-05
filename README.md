@@ -17,6 +17,7 @@ All analyses were performed using **MATLAB + SPM**.
 
 ## Repository Structure
 
+```
 ├── codes/ % Custom MATLAB scripts
 │ ├── contrast.m
 │ ├── PPI_contrast_definition.m
@@ -52,6 +53,7 @@ All analyses were performed using **MATLAB + SPM**.
 ├── fMRI_report.pdf % Full project report
 ├── PIPELINE.docx % Original detailed pipeline
 └── README.md
+```
 
 ---
 
@@ -268,8 +270,11 @@ A key finding is the difference in **network organization**:
 ---
 
 ## Author
-Federica Maria Olivotto  
-Politecnico di Milano  
+Simone Baccin
+Vittorio Pio Remigio Cozzoli
+Paolo Fedele Di Giglio
+Federica Maria Olivotto
+Matteo Pradal
 
 ## Acknowledgments
 Prof. Caterina Amendola  
