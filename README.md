@@ -51,7 +51,6 @@ All analyses were performed using **MATLAB + SPM**.
 │ └── Smoothing.mat
 │
 ├── fMRI_report.pdf % Full project report
-├── PIPELINE.docx % Original detailed pipeline
 └── README.md
 ```
 
@@ -209,10 +208,6 @@ A key finding is the difference in **network organization**:
     - Associative regions  
 
 --> Suggests fundamentally different motor network strategies
-
-## Results Visualization
-
-![Finger PPI connectome](Finger_PPI_connectome.png)
 
 ---
 
