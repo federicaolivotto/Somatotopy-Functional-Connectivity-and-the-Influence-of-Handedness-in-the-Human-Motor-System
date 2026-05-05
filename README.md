@@ -155,6 +155,89 @@ Custom scripts:
 
 ---
 
+## Code Description
+
+This section describes the custom scripts used to support the SPM analysis pipeline and result visualization.
+
+---
+
+### MATLAB Scripts
+
+#### `codes/contrast.m`
+
+Generates first-level GLM contrast vectors for SPM analysis.
+
+- Builds contrast matrices for:
+  - Finger, Foot, and Lips activations
+  - Global motor activation
+  - Effector-specific contrasts (e.g. Finger > Others)
+  - F-contrasts (effects of interest)
+
+- Handles:
+  - Test and retest sessions
+  - Variable number of nuisance regressors (motion parameters + ART outliers)
+
+- Output:
+  - Prints SPM-compatible contrast vectors for direct copy-paste into the SPM Contrast Manager
+
+> Note: the number of regressors (`R_test`, `R_retest`) must be manually adjusted for each subject depending on the design matrix.
+
+---
+
+#### `codes/PPI_contrast_definition.m`
+
+Generates contrast vectors for first-level PPI models in SPM.
+
+- Designed for Psychophysiological Interaction (PPI) analysis
+- Accounts for:
+  - Psychological regressor
+  - Physiological seed signal
+  - PPI interaction term
+  - Nuisance regressors
+
+- Handles:
+  - Different regressor structures between test and retest sessions
+
+- Output:
+  - Single PPI contrast vector in SPM format
+
+---
+
+### Python Notebook
+
+#### `codes/SeedConnectome.ipynb`
+
+Visualization tool for seed-based functional connectivity networks.
+
+- Libraries:
+  - `nilearn`
+  - `matplotlib`
+
+- Functionality:
+  - Constructs seed-based connectomes from activation peaks
+  - Visualizes functional connectivity graphs
+  - Encodes T-values as node colors
+  - Highlights seed regions
+
+- Used for:
+  - Finger PPI network visualization
+  - Foot PPI network visualization
+  - Lip networks (including hemispheric comparisons)
+
+> Note: this notebook is purely for visualization purposes and does not perform statistical inference.
+
+---
+
+### Implementation Notes
+
+- All scripts are designed as **support tools for SPM workflows**
+- Contrast generation is semi-automated due to variability in:
+  - Design matrices
+  - Number of nuisance regressors
+- Manual inspection of SPM models is still required before running contrasts
+
+---
+
 ## Results
 
 ### Somatotopy
