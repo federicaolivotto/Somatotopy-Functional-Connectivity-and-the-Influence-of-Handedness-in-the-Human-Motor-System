@@ -1,9 +1,59 @@
 # Somatotopy, Functional Connectivity and the Influence of Handedness in the Human Motor System (fMRI Study)
 
 ## Overview
-This repository contains the report for an fMRI study investigating the **somatotopic organization**, **task-dependent functional connectivity**, and the **influence of handedness** in the human motor system.
+This repository contains the code and processing pipeline for an fMRI study investigating:
 
-Using task-based functional MRI (fMRI), the study combines **activation analysis (GLM)** and **connectivity analysis (PPI)** to provide a multi-level characterization of motor function.
+- **Somatotopic organization**
+- **Task-dependent functional connectivity**
+- **Influence of handedness** in the human motor system
+
+The study combines:
+- **Activation analysis (GLM)**
+- **Connectivity analysis (PPI)**
+
+All analyses were performed using **MATLAB + SPM**.
+
+---
+
+## Repository Structure
+
+├── codes/ % Custom MATLAB scripts
+│ ├── contrast.m
+│ ├── PPI_contrast_definition.m
+│ └── SeedConnectome.ipynb
+│
+├── SPM_batches/ % SPM batch files
+│ ├── 02_realign.mat
+│ ├── 1st_levelDesign.mat
+│ ├── 2nd_level_con1.mat
+│ ├── 2nd_level_con2.mat
+│ ├── 2nd_level_con3.mat
+│ ├── 2nd_level_con4.mat
+│ ├── 2nd_level_con5.mat
+│ ├── 2nd_level_con6.mat
+│ ├── 2nd_level_con7.mat
+│ ├── 2nd_level_con8_PROVA.mat
+│ ├── 2nd_level_PPI.mat
+│ ├── 4Dto3D.mat
+│ ├── batch_dx_vs_sx.mat
+│ ├── coregister.mat
+│ ├── error_reslice.mat
+│ ├── estimateClassic.mat
+│ ├── estimate_reslice.mat
+│ ├── GLM-NOart.mat
+│ ├── GLM.mat
+│ ├── GLM_PPI_1.mat
+│ ├── normalizedWrite.mat
+│ ├── Realign.mat
+│ ├── Segmentation.mat
+│ ├── slice_timing.mat
+│ └── Smoothing.mat
+│
+├── fMRI_report.pdf % Full project report
+├── PIPELINE.docx % Original detailed pipeline
+└── README.md
+
+---
 
 ## Objectives
 The project addresses three main questions:
@@ -11,6 +61,8 @@ The project addresses three main questions:
 - How are different body parts represented in the primary motor cortex (somatotopy)?
 - How does functional connectivity change during motor tasks?
 - Does handedness influence the organization of motor networks?
+
+---
 
 ## Dataset and Experimental Design
 
@@ -31,10 +83,13 @@ The project addresses three main questions:
   - 30 slices  
   - Voxel size = 4×4×4 mm  
 
+---
+
 ## Methods
 
-### Preprocessing (SPM - MATLAB)
-The pipeline includes:
+### Preprocessing (SPM)
+
+Performed using batch scripts in `SPM_batches/`:
 
 - Slice timing correction  
 - Motion correction (realignment)  
@@ -44,23 +99,27 @@ The pipeline includes:
 - Spatial smoothing (8 mm FWHM)  
 
 Additional steps:
-- Averaging anatomical scans for improved SNR  
-- Flipping left-handed subjects to align dominant hemisphere  
-- Artifact detection (ART) for motion and outliers  
+- Averaging anatomical scans (test/retest)
+- Flipping left-handed subjects (hemisphere alignment)
+- Artifact detection (ART toolbox) for motion and outliers
 
 ---
 
 ### Activation Analysis (GLM)
 
-- First-level GLM per subject:
+- First-level GLM:
   - Task regressors (finger, foot, lips)
   - Motion + artifact regressors
-- Contrasts:
-  - Task vs baseline  
-  - Effector-specific contrasts (e.g. Finger > Others)
 
-- Second-level analysis:
-  - One-sample t-tests (group-level inference)
+- Contrasts:
+  - Task vs baseline
+  - Effector-specific (e.g. Finger > Others)
+
+- Second-level:
+  - One-sample t-tests (group inference)
+
+Custom scripts:
+- `codes/contrast.m`
 
 ---
 
@@ -69,20 +128,26 @@ Additional steps:
 Psychophysiological Interaction (PPI) analysis was used to assess **task-dependent connectivity**.
 
 Steps:
-1. Define seed ROIs from activation peaks  
-2. Extract BOLD time series (VOI)  
-3. Build PPI-GLM:
+
+1. Define seed regions (VOIs) from activation peaks  
+2. Extract BOLD time series  
+3. Build PPI model:
    - Physiological term  
    - Psychological term  
    - Interaction term  
-4. Group-level analysis (one-sample t-tests)
+
+4. First-level and second-level analysis in SPM  
+
+Custom scripts:
+- `codes/PPI_contrast_definition.m`
 
 ---
 
 ### Handedness Analysis
 
 - Two-sample t-tests:
-  - Right-handers vs Left-handers  
+  - Right-handers vs Left-handers
+
 - Analysis performed on:
   - Activation maps  
   - Connectivity maps  
@@ -149,6 +214,41 @@ A key finding is the difference in **network organization**:
 
 ---
 
+## How to Use
+
+### Requirements
+- MATLAB
+- SPM12
+- ART toolbox (for artifact detection)
+
+### Running the Pipeline
+
+1. Load SPM:
+   ```matlab
+   spm fmri
+
+2. Initialize SPM batch system:
+   spm_jobman('initcfg')
+
+3. Open the Batch Editor from the SPM GUI
+
+4. Load batch files from:
+   SPM_batches/
+
+5. Update all paths to match your local dataset
+
+6. Run batches sequentially following the preprocessing → GLM → PPI pipeline
+
+---
+
+## Notes
+
+- The dataset is not included due to size constraints
+- Batch files require manual path configuration
+- Results in the report are based on exploratory thresholds
+
+---
+
 ## Key Insights
 
 - Motor cortex organization is **modular and hierarchical**
@@ -166,9 +266,6 @@ A key finding is the difference in **network organization**:
 - Static connectivity (no dynamic analysis)
 
 ---
-
-## File
-- `fMRI_report.pdf` → Full report
 
 ## Author
 Federica Maria Olivotto  
